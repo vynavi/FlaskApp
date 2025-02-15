@@ -24,7 +24,8 @@ pipeline {
         stage('Stop Existing Flask App') {
             steps {
                 script {
-                    bat 'taskkill /F /IM python.exe /T'  
+                    // Check if any python process is running and stop it
+                    bat 'tasklist | findstr /I "python.exe" >nul && taskkill /F /IM python.exe /T || echo No python process found.'
                 }
             }
         }
@@ -32,7 +33,8 @@ pipeline {
         stage('Run Flask Application') {
             steps {
                 script {
-                    bat 'start /B python app.py' 
+                    // Run Flask app on port 5000
+                    bat 'start /B python app.py'
                 }
             }
         }
