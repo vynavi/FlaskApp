@@ -9,14 +9,14 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'file:///C:/Users/vynub/OneDrive/Desktop/Jenkins/flask_app'
+                git branch: 'main', url: 'https://github.com/vynavi/FlaskApp.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
-                    bat 'pip install -r requirements.txt' // Use 'sh' for Linux
+                    bat 'pip install -r requirements.txt' 
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Stop Existing Flask App') {
             steps {
                 script {
-                    bat 'taskkill /F /IM python.exe /T'  // Stops any running Flask process (Windows)
+                    bat 'taskkill /F /IM python.exe /T'  
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         stage('Run Flask Application') {
             steps {
                 script {
-                    bat 'start /B python app.py' // Runs Flask in background
+                    bat 'start /B python app.py' 
                 }
             }
         }
